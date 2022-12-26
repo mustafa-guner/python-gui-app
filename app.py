@@ -31,19 +31,30 @@ introductionDescription.pack(padx=10)
 rightSection = Frame(width=300, height=600, bg="#FCFCFC")
 
 # Create label and button
-label = Label(root, text="Output", fg="#52538A", font=("arial", 15, "bold"))
-label.pack(pady=(30, 10))
+
+
+title = Label(root, text="Output:",
+              fg="#52538A", font=("arial", 15, "bold"))
+title.pack(pady=(30, 10), padx=(90, 0), anchor="w")
+
+label = Label(root, fg="#52538A", font=("arial", 12, "bold"))
+label.pack(pady=(30, 10), padx=(90, 0), anchor="w")
 
 
 def clickOnInputBtn():
     # Display message box with input field
     message = simpledialog.askstring("Input", "Enter a message:")
     # Update label with user's input
-    label.config(text=message)
+    label.config(text=message, wraplength=400)
 
 
-button = Button(root, text="Enter your input",
+leftButtonContainer = Frame(width=100, height=200)
+leftButtonContainer.pack(side=LEFT, fill="y", expand=False, padx=(90, 0))
+
+
+button = Button(leftButtonContainer, text="Enter your input",
                 command=clickOnInputBtn, padx=10, pady=10,  wraplengt=100, font=("arial", 9))
+
 button.pack()
 
 # Create button to save message to text file
@@ -57,9 +68,15 @@ def saveInputOnClick():
     save_file.close()
 
 
-saveButton = Button(root, text="Save message as file", padx=10, pady=10,
-                    wraplengt=100, font=("arial", 9), bg="#267DFF", fg="#fff",
+rightButtonContainer = Frame(width=100, height=50)
+rightButtonContainer.pack(side=RIGHT, fill="y", expand=False, padx=(0, 90))
+
+
+saveButton = Button(rightButtonContainer, text="Save message as file", padx=10, pady=10,
+                    font=("arial", 9, "bold"), bg="#267DFF", fg="#fff",
                     command=saveInputOnClick)
+
+
 saveButton.pack()
 
 root.mainloop()
